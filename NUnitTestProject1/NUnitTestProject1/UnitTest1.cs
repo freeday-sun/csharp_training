@@ -1,8 +1,8 @@
 using NUnit.Framework;
 
-namespace addressbook_web_tests
+namespace WebAddressbookTests
 {
-    public class Tests
+    public class SampleTests
     {
         [SetUp]
         public void Setup()
@@ -10,7 +10,7 @@ namespace addressbook_web_tests
         }
 
         [Test]
-        public void Test1()
+        public void SampleTest()
         {
             Assert.Pass();
         }
