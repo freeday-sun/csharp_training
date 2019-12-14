@@ -14,7 +14,7 @@ namespace WebAddressbookTests
             FillLoginForm(new AccountData("admin", "secret"));
             ConfirmLogin();
             GoToGroupPage();
-            SelectGroup();
+            SelectGroup(5);
             DeleteGroup();
             ReturnToGroupPage();
             Logout();

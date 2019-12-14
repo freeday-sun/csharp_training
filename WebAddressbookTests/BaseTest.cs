@@ -166,13 +166,13 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.LinkText("add new")).Click();
         }
-        protected void SelectGroup()
+        protected void SelectGroup(int index)
         {
-            driver.FindElement(By.Name("selected[]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
         }
         protected void DeleteGroup()
         {
-            driver.FindElement(By.XPath("(//input[@name='delete'])[2]")).Click();
+            driver.FindElement(By.Name("delete")).Click();
         }
     }
 }
