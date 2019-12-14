@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 
-
 namespace WebAddressbookTests
 {
     [TestFixture]
@@ -10,20 +9,20 @@ namespace WebAddressbookTests
         [Test]
         public void GroupCreationTest()
         {
-            GoToMainPage();
-            FillLoginForm(new AccountData("admin", "secret"));
-            ConfirmLogin();
-            GoToGroupPage();
-            CreateNewGroup();
+            navigatorHelper.GoToMainPage();
+            loginHelper.FillLoginForm(new AccountData("admin", "secret"));
+            loginHelper.ConfirmLogin();
+            navigatorHelper.GoToGroupPage();
+            groupHelper.CreateNewGroup();
             GroupData group = new GroupData("name")
             {
                 Header = "Header",
                 Footer = "Footer"
             };
-            FillGroupForm(group);
-            SubmitGroupForm();
-            ReturnToGroupPage();
-            Logout();
+            groupHelper.FillGroupForm(group);
+            groupHelper.SubmitGroupForm();
+            groupHelper.ReturnToGroupPage();
+            loginHelper.Logout();
         }
     }
 }

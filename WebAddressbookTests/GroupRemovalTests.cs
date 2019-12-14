@@ -10,14 +10,14 @@ namespace WebAddressbookTests
         [Test]
         public void TheRemoveGroupTest()
         {
-            GoToMainPage();
-            FillLoginForm(new AccountData("admin", "secret"));
-            ConfirmLogin();
-            GoToGroupPage();
-            SelectGroup(5);
-            DeleteGroup();
-            ReturnToGroupPage();
-            Logout();
+            navigatorHelper.GoToMainPage();
+            loginHelper.FillLoginForm(new AccountData("admin", "secret"));
+            loginHelper.ConfirmLogin();
+            navigatorHelper.GoToGroupPage();
+            groupHelper.SelectGroup(1);
+            groupHelper.DeleteGroup();
+            groupHelper.ReturnToGroupPage();
+            loginHelper.Logout();
         }
     }
 }

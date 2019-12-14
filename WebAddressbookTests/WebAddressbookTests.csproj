@@ -56,16 +56,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountData.cs" />
+    <Compile Include="BaseHelper.cs" />
     <Compile Include="BaseTest.cs" />
     <Compile Include="ContactCreationTests.cs" />
     <Compile Include="ContactData.cs" />
+    <Compile Include="ContactHelper.cs" />
     <Compile Include="GroupRemovalTests.cs" />
     <Compile Include="GroupCreationTests.cs" />
     <Compile Include="GroupData.cs" />
+    <Compile Include="GroupHelper.cs" />
+    <Compile Include="LoginHelper.cs" />
+    <Compile Include="NavigatorHelper.cs" />
     <Compile Include="SampleTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

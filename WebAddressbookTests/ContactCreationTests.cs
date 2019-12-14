@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 
-
 namespace WebAddressbookTests
 {
     [TestFixture]
@@ -10,15 +9,15 @@ namespace WebAddressbookTests
         [Test]
         public void AddContactTest()
         {
-            GoToMainPage();
-            FillLoginForm(new AccountData("admin", "secret"));
-            ConfirmLogin();
-            GoToAddContactPage();
+            navigatorHelper.GoToMainPage();
+            loginHelper.FillLoginForm(new AccountData("admin", "secret"));
+            loginHelper.ConfirmLogin();
+            navigatorHelper.GoToAddContactPage();
             ContactData contact = new ContactData("firstname", "lastname", "address", "email");
-            FillContactForm(contact);
-            SubmitContactForm();
-            ReturnToHomePage();
-            Logout();
+            contactHelper.FillContactForm(contact);
+            contactHelper.SubmitContactForm();
+            contactHelper.ReturnToHomePage();
+            loginHelper.Logout();
         }
     }
 }
