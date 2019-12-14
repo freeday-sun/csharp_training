@@ -4,7 +4,7 @@ namespace WebAddressbookTests
 {
     public class NavigatorHelper : BaseHelper
     {
-        private readonly string baseURL;
+        private string baseURL;
 
         public NavigatorHelper(IWebDriver driver, string baseURL) : base(driver)
         {

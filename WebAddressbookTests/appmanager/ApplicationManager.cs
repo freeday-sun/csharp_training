@@ -12,30 +12,48 @@ using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressbookTests
 {
-    public class BaseTest
+
+    public class ApplicationManager
     {
         protected IWebDriver driver;
-        private StringBuilder verificationErrors;
+        protected string baseURL;
+        
         protected LoginHelper loginHelper;
         protected NavigatorHelper navigatorHelper;
         protected GroupHelper groupHelper;
         protected ContactHelper contactHelper;
-        protected string baseURL;
 
-        [SetUp]
-        public void SetupTest()
+        public ApplicationManager()
         {
             driver = new FirefoxDriver();
             baseURL = "http://localhost/";
-            verificationErrors = new StringBuilder();
             loginHelper = new LoginHelper(driver);
             navigatorHelper = new NavigatorHelper(driver, baseURL);
             groupHelper = new GroupHelper(driver);
             contactHelper = new ContactHelper(driver);
         }
 
-        [TearDown]
-        public void TeardownTest()
+        public LoginHelper Auth
+        {
+            get { return loginHelper; }
+        }
+
+        public NavigatorHelper Navigator
+        {
+            get { return navigatorHelper; }
+        }
+
+        public GroupHelper Groups
+        {
+            get { return groupHelper; }
+        }
+
+        public ContactHelper Contact
+        {
+            get { return contactHelper; }
+        }
+
+        public void StopBrowser()
         {
             try
             {
@@ -45,7 +63,6 @@ namespace WebAddressbookTests
             {
                 // Ignore errors if unable to close the browser
             }
-            Assert.AreEqual("", verificationErrors.ToString());
         }
     }
 }

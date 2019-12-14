@@ -55,19 +55,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountData.cs" />
-    <Compile Include="BaseHelper.cs" />
-    <Compile Include="BaseTest.cs" />
-    <Compile Include="ContactCreationTests.cs" />
-    <Compile Include="ContactData.cs" />
-    <Compile Include="ContactHelper.cs" />
-    <Compile Include="GroupRemovalTests.cs" />
-    <Compile Include="GroupCreationTests.cs" />
-    <Compile Include="GroupData.cs" />
-    <Compile Include="GroupHelper.cs" />
-    <Compile Include="LoginHelper.cs" />
-    <Compile Include="NavigatorHelper.cs" />
-    <Compile Include="SampleTest.cs" />
+    <Compile Include="model\AccountData.cs" />
+    <Compile Include="appmanager\ApplicationManager.cs" />
+    <Compile Include="appmanager\BaseHelper.cs" />
+    <Compile Include="tests\BaseTest.cs" />
+    <Compile Include="tests\ContactCreationTests.cs" />
+    <Compile Include="model\ContactData.cs" />
+    <Compile Include="appmanager\ContactHelper.cs" />
+    <Compile Include="tests\GroupRemovalTests.cs" />
+    <Compile Include="tests\GroupCreationTests.cs" />
+    <Compile Include="model\GroupData.cs" />
+    <Compile Include="appmanager\GroupHelper.cs" />
+    <Compile Include="appmanager\LoginHelper.cs" />
+    <Compile Include="appmanager\NavigatorHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
