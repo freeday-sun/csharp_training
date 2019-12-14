@@ -4,10 +4,20 @@ namespace WebAddressbookTests
 {
     public class ContactHelper : BaseHelper
     {
-        public ContactHelper(IWebDriver driver) : base(driver)
+        public ContactHelper(ApplicationManager manager) : base(manager)
         {
         }
 
+
+        public ContactHelper Create(ContactData contact) 
+        {
+            manager.Navigator.GoToAddContactPage();
+            FillContactForm(contact);
+            SubmitContactForm();
+            ReturnToHomePage();
+            return this;
+        }
+        
         public void ReturnToHomePage()
         {
             driver.FindElement(By.LinkText("home page")).Click();

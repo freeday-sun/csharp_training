@@ -27,11 +27,14 @@ namespace WebAddressbookTests
         {
             driver = new FirefoxDriver();
             baseURL = "http://localhost/";
-            loginHelper = new LoginHelper(driver);
-            navigatorHelper = new NavigatorHelper(driver, baseURL);
-            groupHelper = new GroupHelper(driver);
-            contactHelper = new ContactHelper(driver);
+            loginHelper = new LoginHelper(this);
+            navigatorHelper = new NavigatorHelper(this, baseURL);
+            groupHelper = new GroupHelper(this);
+            contactHelper = new ContactHelper(this);
         }
+
+        public IWebDriver Driver
+        { get { return driver; } }
 
         public LoginHelper Auth
         {

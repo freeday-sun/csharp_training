@@ -3,21 +3,21 @@
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class AddContactTests : BaseTest
+    public class ContactCreationTests : BaseTest
     {
 
         [Test]
-        public void AddContactTest()
+        public void ContactCreationTest()
         {
-            app.Navigator.GoToMainPage();
-            app.Auth.FillLoginForm(new AccountData("admin", "secret"));
-            app.Auth.ConfirmLogin();
-            app.Navigator.GoToAddContactPage();
             ContactData contact = new ContactData("firstname", "lastname", "address", "email");
-            app.Contact.FillContactForm(contact);
-            app.Contact.SubmitContactForm();
-            app.Contact.ReturnToHomePage();
-            app.Auth.Logout();
+            app.Contact.Create(contact);
+        }
+
+        [Test]
+        public void EmptyContactCreationTest()
+        {
+            ContactData contact = new ContactData("", "", "", "");
+            app.Contact.Create(contact);
         }
     }
 }
