@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace WebAddressbookTests
+namespace WebAddressbookTests.test.ContactTests
 {
     [TestFixture]
     public class ContactCreationTests : BaseTest
@@ -9,14 +9,14 @@ namespace WebAddressbookTests
         [Test]
         public void ContactCreationTest()
         {
-            ContactData contact = new ContactData("firstname", "lastname", "address", "email");
+            ContactData contact = new ContactData("firstname", "lastname", "address", "email", "telephone");
             app.Contact.Create(contact);
         }
 
         [Test]
         public void EmptyContactCreationTest()
         {
-            ContactData contact = new ContactData("", "", "", "");
+            ContactData contact = new ContactData("", "", "", "", "");
             app.Contact.Create(contact);
         }
     }

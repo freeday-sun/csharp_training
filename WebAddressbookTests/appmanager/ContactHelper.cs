@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using System;
 
 namespace WebAddressbookTests
 {
@@ -17,18 +18,68 @@ namespace WebAddressbookTests
             ReturnToHomePage();
             return this;
         }
-        
-        public void ReturnToHomePage()
+
+        internal ContactHelper Modify(ContactData newContactData, int index)
+        {
+            manager.Navigator.GoToMainPage();
+            InitModificateContact(index);
+            FillContactForm(newContactData);
+            SubmitModificationContact();
+            ReturnToHomePage();
+            return this;
+        }
+
+        public ContactHelper Remove(int index)
+        {
+            manager.Navigator.GoToMainPage();
+            SelectContact(index);
+            SubmitRemoveContact();
+            SubmitRemoveContectAlert();
+            return this;
+        }
+
+        private ContactHelper SubmitModificationContact()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
+
+        private ContactHelper InitModificateContact(int index)
+        {
+            driver.FindElement(By.XPath("//a[@href = \"edit.php?id=" + index + "\"]")).Click();
+            return this;
+        }
+
+        private void SubmitRemoveContectAlert()
+        {
+            driver.SwitchTo().Alert().Accept();
+        }
+
+        private ContactHelper SubmitRemoveContact()
+        {
+            driver.FindElement(By.XPath("//input[@value=\"Delete\"]")).Click();
+            return this;
+        }
+
+        public ContactHelper SelectContact(int index)
+        {
+            driver.FindElement(By.CssSelector("input[name=\"selected[]\"]")).Click();
+            return this;
+        }
+
+        public ContactHelper ReturnToHomePage()
         {
             driver.FindElement(By.LinkText("home page")).Click();
+            return this;
         }
 
-        public void SubmitContactForm()
+        public ContactHelper SubmitContactForm()
         {
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
+            return this;
         }
 
-        public void FillContactForm(ContactData contact)
+        public ContactHelper FillContactForm(ContactData contact)
         {
             driver.FindElement(By.Name("firstname")).Click();
             driver.FindElement(By.Name("firstname")).Clear();
@@ -51,9 +102,9 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("address")).Click();
             driver.FindElement(By.Name("address")).Clear();
             driver.FindElement(By.Name("address")).SendKeys(contact.Address);
-            ///            driver.FindElement(By.Name("home")).Click();
-            //            driver.FindElement(By.Name("home")).Clear();
-            //            driver.FindElement(By.Name("home")).SendKeys("test");
+            driver.FindElement(By.Name("home")).Click();
+            driver.FindElement(By.Name("home")).Clear();
+            driver.FindElement(By.Name("home")).SendKeys(contact.Telephone_home);
             //            driver.FindElement(By.Name("mobile")).Click();
             //            driver.FindElement(By.Name("mobile")).Clear();
             //            driver.FindElement(By.Name("mobile")).SendKeys("test");
@@ -84,6 +135,7 @@ namespace WebAddressbookTests
             //            driver.FindElement(By.Name("notes")).Click();
             //            driver.FindElement(By.Name("notes")).Clear();
             //            driver.FindElement(By.Name("notes")).SendKeys("tset");
+            return this;
         }
     }
 }

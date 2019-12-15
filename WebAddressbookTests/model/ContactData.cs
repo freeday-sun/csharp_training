@@ -27,12 +27,13 @@ namespace WebAddressbookTests
         private string secondary_home = "";
         private string secondary_notes = "";
 
-        public ContactData(string firstname, string lastname, string address, string email)
+        public ContactData(string firstname, string lastname, string address, string email, string telephone_home)
         {
             this.firstname = firstname;
             this.lastname = lastname;
             this.address = address;
             this.email = email;
+            this.telephone_home = telephone_home;
         }
 
         public string Firstname
@@ -56,6 +57,12 @@ namespace WebAddressbookTests
         {
             get { return email; }
             set { email = value; }
+        }
+
+        public string Telephone_home
+        {
+            get { return telephone_home; }
+            set { telephone_home = value; }
         }
     }
 }
