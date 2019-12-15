@@ -62,6 +62,7 @@
     <Compile Include="tests\ContactCreationTests.cs" />
     <Compile Include="model\ContactData.cs" />
     <Compile Include="appmanager\ContactHelper.cs" />
+    <Compile Include="tests\GroupModificationGroup.cs" />
     <Compile Include="tests\GroupRemovalTests.cs" />
     <Compile Include="tests\GroupCreationTests.cs" />
     <Compile Include="model\GroupData.cs" />
