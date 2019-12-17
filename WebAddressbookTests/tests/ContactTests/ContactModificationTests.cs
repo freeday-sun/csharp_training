@@ -6,7 +6,7 @@ namespace WebAddressbookTests.test.ContactTests
     [TestFixture]
     public class ContactModificationTests : BaseTest
     {
-        private readonly int CONTACT_INDEX = 1;
+        private readonly int CONTACT_INDEX = 4; //min value = 2, because in table contact_index begin with 2
 
         [Test]
         public void ContactModificationTest()
