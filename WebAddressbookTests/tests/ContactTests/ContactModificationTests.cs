@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 
 
-namespace WebAddressbookTests.test.ContactTests
+namespace WebAddressbookTests.tests.ContactTests
 {
     [TestFixture]
     public class ContactModificationTests : BaseTest
