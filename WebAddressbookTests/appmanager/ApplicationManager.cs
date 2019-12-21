@@ -22,7 +22,7 @@ namespace WebAddressbookTests
         protected NavigatorHelper navigatorHelper;
         protected GroupHelper groupHelper;
         protected ContactHelper contactHelper;
-        private static ApplicationManager instance;
+        private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
 
         private ApplicationManager()
         {
@@ -34,13 +34,25 @@ namespace WebAddressbookTests
             contactHelper = new ContactHelper(this);
         }
 
+        ~ApplicationManager() 
+        {
+            try
+            {
+                driver.Quit();
+            }
+            catch (Exception)
+            {
+                // Ignore errors if unable to close the browser
+            }
+        }
+
         public static ApplicationManager GetInstance()
         {
-            if (instance == null) 
+            if (! app.IsValueCreated) 
             {
-                instance = new ApplicationManager();
+                app.Value = new ApplicationManager();
             }
-            return instance;
+            return app.Value;
         }
         public IWebDriver Driver
         { get { return driver; } }
@@ -65,16 +77,5 @@ namespace WebAddressbookTests
             get { return contactHelper; }
         }
 
-        public void StopBrowser()
-        {
-            try
-            {
-                driver.Quit();
-            }
-            catch (Exception)
-            {
-                // Ignore errors if unable to close the browser
-            }
-        }
     }
 }

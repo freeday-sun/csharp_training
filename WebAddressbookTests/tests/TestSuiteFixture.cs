@@ -19,12 +19,5 @@ namespace WebAddressbookTests
             app.Auth.FillLoginForm(new AccountData("admin", "secret"));
             app.Auth.ConfirmLogin();
         }
-
-        [OneTimeTearDownAttribute]
-        public void StopApplicationManager()
-        {
-            ApplicationManager.GetInstance().Auth.Logout();
-            ApplicationManager.GetInstance().StopBrowser();
-        }
     }
 }
