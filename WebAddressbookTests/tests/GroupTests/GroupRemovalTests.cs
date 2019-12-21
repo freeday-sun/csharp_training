@@ -3,7 +3,7 @@
 namespace WebAddressbookTests.tests.GroupTests
 {
     [TestFixture]
-    public class  GroupRemovalTests : BaseTest
+    public class  GroupRemovalTests : AuthBaseTest
 
     {
         private readonly int GROUP_INDEX = 1;

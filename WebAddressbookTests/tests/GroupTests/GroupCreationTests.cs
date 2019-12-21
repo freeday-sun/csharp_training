@@ -3,7 +3,7 @@
 namespace WebAddressbookTests.tests.GroupTests
 {
     [TestFixture]
-    class GroupCreationTests : BaseTest
+    class GroupCreationTests : AuthBaseTest
     {
 
         [Test]

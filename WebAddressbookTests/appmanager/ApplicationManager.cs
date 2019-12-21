@@ -50,7 +50,9 @@ namespace WebAddressbookTests
         {
             if (! app.IsValueCreated) 
             {
-                app.Value = new ApplicationManager();
+                ApplicationManager newInstance = new ApplicationManager();
+                app.Value = newInstance;
+                newInstance.Navigator.GoToMainPage();
             }
             return app.Value;
         }

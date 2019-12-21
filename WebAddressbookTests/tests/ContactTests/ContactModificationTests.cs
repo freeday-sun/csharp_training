@@ -4,7 +4,7 @@
 namespace WebAddressbookTests.tests.ContactTests
 {
     [TestFixture]
-    public class ContactModificationTests : BaseTest
+    public class ContactModificationTests : AuthBaseTest
     {
         private readonly int CONTACT_INDEX = 2; //min value = 2, because in table contact_index begin with 2
 
