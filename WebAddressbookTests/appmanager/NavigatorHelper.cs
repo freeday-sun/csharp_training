@@ -13,6 +13,10 @@ namespace WebAddressbookTests
 
         public void GoToMainPage()
         {
+            if (driver.Url == baseURL + "addressbook")
+            {
+                return;
+            }
             driver.Navigate().GoToUrl(baseURL + "addressbook");
         }
 
@@ -23,6 +27,15 @@ namespace WebAddressbookTests
 
         public void GoToGroupPage()
         {
+            bool NewGroupButton =  IsElementPresent(By.CssSelector("input[name=\"new\"]"));
+            bool EditGroupButton = IsElementPresent(By.CssSelector("input[name=\"edit\"]"));
+            bool DeleteGroupButton = IsElementPresent(By.CssSelector("input[name=\"new\"]"));
+
+            if (driver.Url == baseURL + "addressbook/group.php"
+                && NewGroupButton && EditGroupButton && DeleteGroupButton)
+            {
+                return;
+            }
             driver.FindElement(By.LinkText("groups")).Click();
         }
 
