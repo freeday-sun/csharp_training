@@ -11,8 +11,8 @@ namespace WebAddressbookTests.tests.GroupTests
         {
             GroupData newGroupData = new GroupData("name1")
             {
-                Header = "Header1",
-                Footer = "Footer1"
+                Header = null,
+                Footer = null
             };
             app.Groups.Modify(newGroupData, GROUP_INDEX);
         }
