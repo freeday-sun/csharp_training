@@ -44,7 +44,7 @@ namespace WebAddressbookTests
 
         public bool IsLoggedIn()
         {
-            return IsElementPresent(By.LinkText("Logout"));
+            return IsElementPresent(By.CssSelector("form[name=\"logout\"] b"));
         }
 
         public bool IsLoggedIn(AccountData account)

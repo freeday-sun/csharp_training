@@ -15,7 +15,7 @@ namespace WebAddressbookTests
             manager.Navigator.GoToAddContactPage();
             FillContactForm(contact);
             SubmitContactForm();
-            ReturnToHomePage();
+            manager.Navigator.ReturnToHomePageAfterWorkWithContact();
             return this;
         }
 
@@ -25,7 +25,7 @@ namespace WebAddressbookTests
             InitModificateContact(index);
             FillContactForm(newContactData);
             SubmitModificationContact();
-            ReturnToHomePage();
+            manager.Navigator.ReturnToHomePageAfterWorkWithContact();
             return this;
         }
 
@@ -33,9 +33,39 @@ namespace WebAddressbookTests
         {
             manager.Navigator.GoToMainPage();
             SelectContact(index);
-            SubmitRemoveContact();
-            SubmitRemoveContectAlert();
+            SubmitDeleteContact();
+            SubmitDeleteContectAlert();
+            manager.Navigator.GoToMainPage();
             return this;
+        }
+
+        public ContactHelper RemoveAll()
+        {
+            manager.Navigator.GoToMainPage();
+            SelectAllContacts();
+            SubmitDeleteContact();
+            SubmitDeleteContectAlert();
+            manager.Navigator.GoToMainPage();
+            return this;
+        }
+
+        public void ContactsShouldNotBeEmpty()
+        {
+            if (ContactListIsEmpty()) 
+            {
+                manager.Contact.Create(new ContactData("firstname", "lastname", "address", "email", "telephone"));
+            }
+        }
+
+        public bool ContactListIsEmpty()
+        {
+            bool ContactTableRows = IsElementPresent(By.XPath("//tbody/tr[2]"));
+
+            if (!ContactTableRows)
+            {
+                return true;
+            }
+            return false;
         }
 
         private ContactHelper SubmitModificationContact()
@@ -50,12 +80,12 @@ namespace WebAddressbookTests
             return this;
         }
 
-        private void SubmitRemoveContectAlert()
+        private void SubmitDeleteContectAlert()
         {
             driver.SwitchTo().Alert().Accept();
         }
 
-        private ContactHelper SubmitRemoveContact()
+        private ContactHelper SubmitDeleteContact()
         {
             driver.FindElement(By.XPath("//input[@value=\"Delete\"]")).Click();
             return this;
@@ -67,15 +97,15 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper ReturnToHomePage()
+        private ContactHelper SelectAllContacts()
         {
-            driver.FindElement(By.LinkText("home page")).Click();
+            driver.FindElement(By.CssSelector("#MassCB")).Click();
             return this;
         }
 
         public ContactHelper SubmitContactForm()
         {
-            driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
+            driver.FindElement(By.CssSelector("input[value=\"Enter\"]")).Click();
             return this;
         }
 

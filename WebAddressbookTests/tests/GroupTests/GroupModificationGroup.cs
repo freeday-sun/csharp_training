@@ -9,12 +9,15 @@ namespace WebAddressbookTests.tests.GroupTests
         [Test]
         public void GroupModificationTest()
         {
-            GroupData newGroupData = new GroupData("name1")
-            {
-                Header = null,
-                Footer = null
-            };
+            //prepare
+            app.Groups.GroupsShouldNotBeEmpty();
+
+            //action
+            GroupData newGroupData = new GroupData("name2", null, null);
             app.Groups.Modify(newGroupData, GROUP_INDEX);
+
+            //verification
+            //so far without verification
         }
     }
 }

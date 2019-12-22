@@ -11,7 +11,28 @@ namespace WebAddressbookTests.tests.ContactTests
         [Test]
         public void ContactRemovalTest()
         {
+            //prepare
+            app.Contact.ContactsShouldNotBeEmpty();
+
+            //action
             app.Contact.Remove(CONTACT_INDEX);
+
+            //verification
+            //so far without verification
+        }
+
+        [Test]
+        public void AllContactsRemovalTest()
+        {
+            //prepare
+            app.Contact.ContactsShouldNotBeEmpty();
+
+            //action
+            app.Contact.RemoveAll();
+
+            //verification
+            System.Threading.Thread.Sleep(1000); // redirect to the main page does not have time to work
+            Assert.IsTrue(app.Contact.ContactListIsEmpty());
         }
     }
 }

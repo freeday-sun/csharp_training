@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using System;
 
 namespace WebAddressbookTests
 {
@@ -14,19 +15,19 @@ namespace WebAddressbookTests
             InitNewGroup();
             FillGroupForm(group);
             SubmitGroupForm();
-            ReturnToGroupPage();
+            manager.Navigator.ReturnToGroupPage();
             return this;
         }
-
 
         public GroupHelper Remove(int index)
         {
             manager.Navigator.GoToGroupPage();
             SelectGroup(index);
-            DeleteGroup();
-            ReturnToGroupPage();
+            SubmitDeleteGroup();
+            manager.Navigator.ReturnToGroupPage();
             return this;
         }
+
 
         public GroupHelper Modify(GroupData group, int index)
         {
@@ -35,14 +36,28 @@ namespace WebAddressbookTests
             InitModificateGroup();
             FillGroupForm(group);
             SubmitModificationGroup();
-            ReturnToGroupPage();
+            manager.Navigator.ReturnToGroupPage();
             return this;
         }
 
-        public GroupHelper ReturnToGroupPage()
+        public void GroupsShouldNotBeEmpty()
         {
-            driver.FindElement(By.LinkText("group page")).Click();
-            return this;
+            manager.Navigator.GoToGroupPage();
+            if (GroupsListIsEmpty())
+            {
+                manager.Groups.Create(new GroupData("name1", "header", "footer"));
+            }
+        }
+
+        private bool GroupsListIsEmpty()
+        {
+            bool GroupTableRows = IsElementPresent(By.XPath("//span"));
+
+            if (!GroupTableRows) 
+            {
+                return true;
+            }
+            return false;
         }
 
         public GroupHelper SubmitGroupForm()
@@ -67,11 +82,11 @@ namespace WebAddressbookTests
 
         public GroupHelper SelectGroup(int index)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name=\"selected[]\"])[" + index + "]")).Click();
             return this;
         }
 
-        public GroupHelper DeleteGroup()
+        public GroupHelper SubmitDeleteGroup()
         {
             driver.FindElement(By.Name("delete")).Click();
             return this;

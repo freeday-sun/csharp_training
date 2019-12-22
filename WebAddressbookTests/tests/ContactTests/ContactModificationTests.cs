@@ -11,8 +11,15 @@ namespace WebAddressbookTests.tests.ContactTests
         [Test]
         public void ContactModificationTest()
         {
+            //prepare
+            app.Contact.ContactsShouldNotBeEmpty();
+           
+            //action
             ContactData newContactData = new ContactData("firstname1", null, null, null, null);
             app.Contact.Modify(newContactData, CONTACT_INDEX);
+
+            //verification
+            //so far without verification
         }
     }
 }

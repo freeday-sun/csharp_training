@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
-namespace WebAddressbookTests
+namespace WebAddressbookTests.tests.LoginTests
 {
     [TestFixture]
     public class LoginTests : BaseTest
@@ -37,6 +37,7 @@ namespace WebAddressbookTests
 
 
             //verification
+            System.Threading.Thread.Sleep(1000); // redirect to the main page does not have time to work
             Assert.IsFalse(app.Auth.IsLoggedIn());
         }
 

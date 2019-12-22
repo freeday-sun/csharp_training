@@ -10,7 +10,15 @@ namespace WebAddressbookTests.tests.GroupTests
         [Test]
         public void GroupRemovalTest()
         {
+            //prepare
+            app.Groups.GroupsShouldNotBeEmpty();
+
+            //action
             app.Groups.Remove(GROUP_INDEX);
+
+            //vetification
+            //so far without verification
         }
+
     }
 }
