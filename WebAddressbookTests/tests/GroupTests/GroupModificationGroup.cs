@@ -13,7 +13,7 @@ namespace WebAddressbookTests.tests.GroupTests
             app.Groups.GroupsShouldNotBeEmpty();
 
             //action
-            GroupData newGroupData = new GroupData("name2", null, null);
+            GroupData newGroupData = new GroupData("name2");
             app.Groups.Modify(newGroupData, GROUP_INDEX);
 
             //verification

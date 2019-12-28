@@ -1,16 +1,30 @@
-﻿namespace WebAddressbookTests
+﻿using System;
+
+namespace WebAddressbookTests
 {
-    public class GroupData
+    public class GroupData : IEquatable<GroupData>
     {
         private string name;
         private string header = "";
         private string footer = "";
 
-        public GroupData(string name, string header, string footer) 
+        public GroupData(string name) 
         {
             this.name = name;
-            this.header = header;
-            this.footer = footer;
+        }
+
+        public bool Equals(GroupData other)
+        {
+            if (object.ReferenceEquals(other, null))
+            { return false; }
+            else if (object.ReferenceEquals(this, other))
+            { return true; }
+            return Name == other.Name;
+        }
+
+        public int GetHashCode()
+        {
+            return Name.GetHashCode();
         }
 
         public string Name 

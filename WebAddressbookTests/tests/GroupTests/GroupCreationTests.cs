@@ -10,7 +10,11 @@ namespace WebAddressbookTests.tests.GroupTests
         [Test]
         public void GroupCreationTest()
         {   //prepare
-            GroupData group = new GroupData("name", "Header", "Footer");
+            GroupData group = new GroupData("name")
+            {
+                Header = "Header",
+                Footer = "Footer"
+            };
             List<GroupData> oldGroups = app.Groups.GetGroupsList();
 
             //action
@@ -25,7 +29,7 @@ namespace WebAddressbookTests.tests.GroupTests
         public void EmptyGroupCreationTest()
         {
             //prepare
-            GroupData group = new GroupData("", "", "");
+            GroupData group = new GroupData("");
             List<GroupData> oldGroups = app.Groups.GetGroupsList();
 
             //action

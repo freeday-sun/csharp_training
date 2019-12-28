@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using System;
 using System.Collections.Generic;
 
 namespace WebAddressbookTests
@@ -28,6 +29,14 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public GroupHelper RemoveAll()
+        {
+            manager.Navigator.GoToGroupPage();
+            SelectAllGroups();
+            SubmitDeleteGroup();
+            manager.Navigator.ReturnToGroupPage();
+            return this;
+        }
 
         public GroupHelper Modify(GroupData group, int index)
         {
@@ -45,7 +54,7 @@ namespace WebAddressbookTests
             manager.Navigator.GoToGroupPage();
             if (GroupsListIsEmpty())
             {
-                manager.Groups.Create(new GroupData("name1", "header", "footer"));
+                manager.Groups.Create(new GroupData("name1"));
             }
         }
 
@@ -67,13 +76,28 @@ namespace WebAddressbookTests
             ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
             foreach (IWebElement element in elements)
             {
-                groups.Add(new GroupData(element.Text, "", ""));
+                groups.Add(new GroupData(element.Text));
             }
 
             return groups;
 
         }
 
+        public void SelectAllGroups()
+        {
+            try
+            {
+                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group input"));
+                foreach (IWebElement element in elements)
+                {
+                    element.Click();
+                }
+            }
+            catch(Exception)
+            {
+                return;
+            }
+        }
 
         public GroupHelper SubmitGroupForm()
         {
@@ -97,7 +121,7 @@ namespace WebAddressbookTests
 
         public GroupHelper SelectGroup(int index)
         {
-            driver.FindElement(By.XPath("(//input[@name=\"selected[]\"])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name=\"selected[]\"])[" + (index + 1) + "]")).Click();
             return this;
         }
 
