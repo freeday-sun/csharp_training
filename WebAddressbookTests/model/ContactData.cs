@@ -38,8 +38,7 @@ namespace WebAddressbookTests
             { return false; }
             if (object.ReferenceEquals(this, other))
             { return true; }
-            if (Firstname == other.Firstname && Lastname == other.Lastname && Address == other.Address
-                && Email == other.Email && Telephone_home == other.Telephone_home)
+            if (Firstname == other.Firstname && Lastname == other.Lastname)
             { 
                 return true; 
             }
@@ -54,7 +53,7 @@ namespace WebAddressbookTests
 
         public override string ToString()
         {
-            return "name=" + Firstname + "\n" + "lname=" + Lastname + "\n" + "address=" + Address + "\n" + "email=" + Email + "\n" + "Tel=" + Telephone_home;
+            return "name=" + Firstname + "\n" + "lname=" + Lastname + "\n";
         }
 
         public int CompareTo(ContactData other)
@@ -64,25 +63,14 @@ namespace WebAddressbookTests
 
             int FirstnameCompare = Firstname.CompareTo(other.Firstname);
             int LastnameCompare = Lastname.CompareTo(other.Lastname);
-            int AddressCompare = Address.CompareTo(other.Address);
-            int EmailCompare = Email.CompareTo(other.Email);
-            int Telephone_homeCompare = Telephone_home.CompareTo(other.Telephone_home);
 
-            if (FirstnameCompare == 0 && LastnameCompare == 0 && AddressCompare == 0
-                && EmailCompare == 0 && Telephone_homeCompare == 0)
-            { 
-                return 0; 
-            
-            };
 
-            if (FirstnameCompare == -1 && LastnameCompare == -1 && AddressCompare == -1
-                && EmailCompare == -1 && Telephone_homeCompare == -1)
+            if (FirstnameCompare == 0)
             {
-                return -1;
+                return LastnameCompare;
+            }
 
-            };
-
-            return 1;
+            return FirstnameCompare;
         }
 
         public string Firstname

@@ -17,7 +17,7 @@ namespace WebAddressbookTests.tests.ContactTests
 
             //action
             app.Contact.Remove(CONTACT_INDEX);
-            System.Threading.Thread.Sleep(1000);// 
+            System.Threading.Thread.Sleep(1000);
 
             //verification
             List<ContactData> newContacts = app.Contact.GetGroupsList();
@@ -32,7 +32,6 @@ namespace WebAddressbookTests.tests.ContactTests
         {
             //prepare
             app.Contact.ContactsShouldNotBeEmpty();
-            List<ContactData> oldContacts = app.Contact.GetGroupsList();
 
             //action
             app.Contact.RemoveAll();

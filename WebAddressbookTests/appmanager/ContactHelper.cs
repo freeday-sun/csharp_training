@@ -27,15 +27,11 @@ namespace WebAddressbookTests
             ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name=\"entry\"]"));
             foreach (IWebElement element in elements)
             {
-
                 IList<IWebElement> fields = element.FindElements(By.TagName("td"));
                 string Firstname = fields[2].Text;
                 string Lastname = fields[1].Text;
-                string Addresss = fields[3].Text;
-                string Email = fields[4].Text;
-                string Telephone_home = fields[5].Text;
 
-                contacts.Add(new ContactData(Firstname, Lastname, Addresss, Email, Telephone_home));
+                contacts.Add(new ContactData(Firstname, Lastname, "", "", ""));
             }
 
             return contacts;
