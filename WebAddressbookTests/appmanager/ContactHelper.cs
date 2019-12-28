@@ -1,4 +1,6 @@
 ﻿using OpenQA.Selenium;
+using System;
+using System.Collections.Generic;
 
 namespace WebAddressbookTests
 {
@@ -16,6 +18,27 @@ namespace WebAddressbookTests
             SubmitContactForm();
             manager.Navigator.ReturnToHomePageAfterWorkWithContact();
             return this;
+        }
+
+        public List<ContactData> GetGroupsList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            manager.Navigator.GoToMainPage();
+            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name=\"entry\"]"));
+            foreach (IWebElement element in elements)
+            {
+
+                IList<IWebElement> fields = element.FindElements(By.TagName("td"));
+                string Firstname = fields[2].Text;
+                string Lastname = fields[1].Text;
+                string Addresss = fields[3].Text;
+                string Email = fields[4].Text;
+                string Telephone_home = fields[5].Text;
+
+                contacts.Add(new ContactData(Firstname, Lastname, Addresss, Email, Telephone_home));
+            }
+
+            return contacts;
         }
 
         internal ContactHelper Modify(ContactData newContactData, int index)
@@ -75,7 +98,7 @@ namespace WebAddressbookTests
 
         private ContactHelper InitModificateContact(int index)
         {
-            driver.FindElement(By.XPath("//tbody/tr[" + index + "]//td[8]")).Click();
+            driver.FindElement(By.XPath("//tbody/tr[" + (index + 2)+ "]//td[8]")).Click();
             return this;
         }
 
@@ -92,7 +115,7 @@ namespace WebAddressbookTests
 
         public ContactHelper SelectContact(int index)
         {
-            driver.FindElement(By.XPath("//tbody/tr["+ index +"]/td/input")).Click();
+            driver.FindElement(By.XPath("//tbody/tr["+ (index + 2) +"]/td/input")).Click();
             return this;
         }
 
