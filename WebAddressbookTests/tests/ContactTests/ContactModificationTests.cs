@@ -16,7 +16,7 @@ namespace WebAddressbookTests.tests.ContactTests
             List<ContactData> oldContacts = app.Contact.GetGroupsList();
 
             //action
-            ContactData newContactData = new ContactData("firstname1", null, null, null, null);
+            ContactData newContactData = new ContactData("firstname1", "", "", "", "");
             app.Contact.Modify(newContactData, CONTACT_INDEX);
 
             //verification

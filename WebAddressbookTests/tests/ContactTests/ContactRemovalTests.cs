@@ -17,15 +17,17 @@ namespace WebAddressbookTests.tests.ContactTests
 
             //action
             app.Contact.Remove(CONTACT_INDEX);
+            System.Threading.Thread.Sleep(1000);// 
 
             //verification
             List<ContactData> newContacts = app.Contact.GetGroupsList();
-            newContacts.RemoveAt(CONTACT_INDEX);
+            oldContacts.RemoveAt(CONTACT_INDEX);
             oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
         }
 
+        [Test]
         public void ContactsRemovalAllTest()
         {
             //prepare
@@ -34,8 +36,8 @@ namespace WebAddressbookTests.tests.ContactTests
 
             //action
             app.Contact.RemoveAll();
+            System.Threading.Thread.Sleep(1000);
 
-            //verification
             //verification
             List<ContactData> newContacts = app.Contact.GetGroupsList();
             Assert.IsTrue(newContacts.Count == 0);

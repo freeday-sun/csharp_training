@@ -144,7 +144,7 @@ namespace WebAddressbookTests
             //            FillField(By.Name("mobile"), contact.Telephone_mobile);
             //            FillField(By.Name("work"), contact.Telephone_work);
             //            FillField(By.Name("fax"), contact.Telephone_fax);
-            //            FillField(By.Name("email"), contact.Email);
+                        FillField(By.Name("email"), contact.Email);
             //            FillField(By.Name("email2"), contact.Email2);
             //            FillField(By.Name("email3"), contact.Email3);
             //            FillField(By.Name("homepage"), contact.Homepage);
