@@ -16,19 +16,26 @@ namespace WebAddressbookTests.tests.ContactTests
             List<ContactData> oldContacts = app.Contact.GetGroupsList();
 
             //action
-            ContactData newContactData = new ContactData("firstname1", "", "", "", "");
+            ContactData newContactData = new ContactData("firstname1", "lastname1");
             app.Contact.Modify(newContactData, CONTACT_INDEX);
+            ContactData oldData = oldContacts[CONTACT_INDEX];
 
             //verification
             List<ContactData> newContacts = app.Contact.GetGroupsList();
             oldContacts[CONTACT_INDEX].Firstname = newContactData.Firstname;
             oldContacts[CONTACT_INDEX].Lastname = newContactData.Lastname;
-            oldContacts[CONTACT_INDEX].Address = newContactData.Address;
-            oldContacts[CONTACT_INDEX].Email = newContactData.Email;
-            oldContacts[CONTACT_INDEX].Telephone_home = newContactData.Telephone_home;
             oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactData contact in newContacts)
+            {
+                if (contact.Id == oldData.Id)
+                {
+                    Assert.AreEqual(newContactData.Firstname, contact.Firstname);
+                    Assert.AreEqual(newContactData.Lastname, contact.Lastname);
+                }
+            }
         }
     }
 }

@@ -34,10 +34,12 @@ namespace WebAddressbookTests
                     string Firstname = fields[2].Text;
                     string Lastname = fields[1].Text;
 
-                    contactCache.Add(new ContactData(Firstname, Lastname, "", "", ""));
+                    ContactData contacts = new ContactData(Firstname, Lastname);
+                    contacts.Id = element.FindElement(By.XPath("//td//input")).GetAttribute("value");
+                    contactCache.Add(contacts);
                 }
             }
-            return contactCache;
+            return new List<ContactData>(contactCache);
         }
 
         internal ContactHelper Modify(ContactData newContactData, int index)
