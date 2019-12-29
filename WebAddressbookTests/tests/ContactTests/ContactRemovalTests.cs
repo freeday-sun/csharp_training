@@ -28,7 +28,7 @@ namespace WebAddressbookTests.tests.ContactTests
         }
 
         [Test]
-        public void ContactsRemovalAllTest()
+        public void AllContactsRemovaTest()
         {
             //prepare
             app.Contact.ContactsShouldNotBeEmpty();

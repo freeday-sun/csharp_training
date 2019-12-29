@@ -20,8 +20,14 @@ namespace WebAddressbookTests.tests.GroupTests
 
             //vetification
             List<GroupData> newGroups = app.Groups.GetGroupsList();
+            GroupData toBeRemoved = oldGroups[0];
             oldGroups.RemoveAt(GROUP_INDEX);
             Assert.AreEqual(oldGroups, newGroups);
+
+            foreach (GroupData group in newGroups)
+            {
+                Assert.AreNotEqual(group.Id, toBeRemoved.Id);
+            }
         }
         [Test]
         public void AllGroupRemovalTest()
