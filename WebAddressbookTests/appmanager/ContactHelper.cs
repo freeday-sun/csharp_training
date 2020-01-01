@@ -21,7 +21,7 @@ namespace WebAddressbookTests
         }
 
         private List<ContactData> contactCache = null;
-        public List<ContactData> GetGroupsList()
+        public List<ContactData> GetContactsList()
         {
             if (contactCache == null)
             {

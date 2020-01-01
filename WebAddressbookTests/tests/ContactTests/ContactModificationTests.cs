@@ -13,7 +13,7 @@ namespace WebAddressbookTests.tests.ContactTests
         {
             //prepare
             app.Contact.ContactsShouldNotBeEmpty();
-            List<ContactData> oldContacts = app.Contact.GetGroupsList();
+            List<ContactData> oldContacts = app.Contact.GetContactsList();
 
             //action
             ContactData newContactData = new ContactData("firstname1", "lastname1");
@@ -21,7 +21,7 @@ namespace WebAddressbookTests.tests.ContactTests
             ContactData oldData = oldContacts[CONTACT_INDEX];
 
             //verification
-            List<ContactData> newContacts = app.Contact.GetGroupsList();
+            List<ContactData> newContacts = app.Contact.GetContactsList();
             oldContacts[CONTACT_INDEX].Firstname = newContactData.Firstname;
             oldContacts[CONTACT_INDEX].Lastname = newContactData.Lastname;
             oldContacts.Sort();

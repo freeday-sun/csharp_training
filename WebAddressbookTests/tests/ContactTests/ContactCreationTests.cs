@@ -12,13 +12,13 @@ namespace WebAddressbookTests.tests.ContactTests
         {
             //prepare
             ContactData contact = new ContactData("firstname", "lastname", "address", "email", "telephone");
-            List<ContactData> oldContacts = app.Contact.GetGroupsList();
+            List<ContactData> oldContacts = app.Contact.GetContactsList();
 
             //action
             app.Contact.Create(contact);
 
             //verification
-            List<ContactData> newContacts = app.Contact.GetGroupsList();
+            List<ContactData> newContacts = app.Contact.GetContactsList();
             oldContacts.Add(contact);
             oldContacts.Sort();
             newContacts.Sort();
@@ -30,13 +30,13 @@ namespace WebAddressbookTests.tests.ContactTests
         {
             //prepare
             ContactData contact = new ContactData("", "", "", "", "");
-            List<ContactData> oldContacts = app.Contact.GetGroupsList();
+            List<ContactData> oldContacts = app.Contact.GetContactsList();
 
             //action
             app.Contact.Create(contact);
 
             //verification
-            List<ContactData> newContacts = app.Contact.GetGroupsList();
+            List<ContactData> newContacts = app.Contact.GetContactsList();
             oldContacts.Add(contact);
             oldContacts.Sort();
             newContacts.Sort();
