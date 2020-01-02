@@ -13,22 +13,28 @@ namespace WebAddressbookTests.tests.ContactTests
         {
             //prepare
             app.Contact.ContactsShouldNotBeEmpty();
-            List<ContactData> oldContacts = app.Contact.GetGroupsList();
+            List<ContactData> oldContacts = app.Contact.GetContactsList();
 
             //action
             app.Contact.Remove(CONTACT_INDEX);
             System.Threading.Thread.Sleep(1000);
 
             //verification
-            List<ContactData> newContacts = app.Contact.GetGroupsList();
+            List<ContactData> newContacts = app.Contact.GetContactsList();
+            ContactData toBeRemoved = oldContacts[0];
             oldContacts.RemoveAt(CONTACT_INDEX);
             oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactData contact in newContacts)
+            {
+                Assert.AreNotEqual(contact.Id, toBeRemoved.Id);
+            }
         }
 
         [Test]
-        public void ContactsRemovalAllTest()
+        public void AllContactsRemovaTest()
         {
             //prepare
             app.Contact.ContactsShouldNotBeEmpty();
@@ -38,7 +44,7 @@ namespace WebAddressbookTests.tests.ContactTests
             System.Threading.Thread.Sleep(1000);
 
             //verification
-            List<ContactData> newContacts = app.Contact.GetGroupsList();
+            List<ContactData> newContacts = app.Contact.GetContactsList();
             Assert.IsTrue(newContacts.Count == 0);
         }
     }
