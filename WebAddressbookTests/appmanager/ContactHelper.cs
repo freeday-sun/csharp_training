@@ -1,4 +1,6 @@
 ﻿using OpenQA.Selenium;
+using System;
+using System.Collections.Generic;
 
 namespace WebAddressbookTests
 {
@@ -16,6 +18,23 @@ namespace WebAddressbookTests
             SubmitContactForm();
             manager.Navigator.ReturnToHomePageAfterWorkWithContact();
             return this;
+        }
+
+        public List<ContactData> GetGroupsList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            manager.Navigator.GoToMainPage();
+            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name=\"entry\"]"));
+            foreach (IWebElement element in elements)
+            {
+                IList<IWebElement> fields = element.FindElements(By.TagName("td"));
+                string Firstname = fields[2].Text;
+                string Lastname = fields[1].Text;
+
+                contacts.Add(new ContactData(Firstname, Lastname, "", "", ""));
+            }
+
+            return contacts;
         }
 
         internal ContactHelper Modify(ContactData newContactData, int index)
@@ -75,7 +94,7 @@ namespace WebAddressbookTests
 
         private ContactHelper InitModificateContact(int index)
         {
-            driver.FindElement(By.XPath("//tbody/tr[" + index + "]//td[8]")).Click();
+            driver.FindElement(By.XPath("//tbody/tr[" + (index + 2)+ "]//td[8]")).Click();
             return this;
         }
 
@@ -92,7 +111,7 @@ namespace WebAddressbookTests
 
         public ContactHelper SelectContact(int index)
         {
-            driver.FindElement(By.XPath("//tbody/tr["+ index +"]/td/input")).Click();
+            driver.FindElement(By.XPath("//tbody/tr["+ (index + 2) +"]/td/input")).Click();
             return this;
         }
 
@@ -121,7 +140,7 @@ namespace WebAddressbookTests
             //            FillField(By.Name("mobile"), contact.Telephone_mobile);
             //            FillField(By.Name("work"), contact.Telephone_work);
             //            FillField(By.Name("fax"), contact.Telephone_fax);
-            //            FillField(By.Name("email"), contact.Email);
+                        FillField(By.Name("email"), contact.Email);
             //            FillField(By.Name("email2"), contact.Email2);
             //            FillField(By.Name("email3"), contact.Email3);
             //            FillField(By.Name("homepage"), contact.Homepage);
