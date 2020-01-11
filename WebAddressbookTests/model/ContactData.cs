@@ -1,62 +1,91 @@
-﻿namespace WebAddressbookTests
+﻿using System;
+
+namespace WebAddressbookTests
 {
     public class ContactData
     {
-        private string firstname;
         private string middlename = "";
-        private string lastname;
         private string nickname = "";
         private string title = "";
         private string company = "";
-        private string address;
-        private string telephone_home;
-        private string telephone_work = "";
-        private string telephone_mobile = "";
-        private string telephone_fax = "";
-        private string email;
-        private string email2 = "";
-        private string email3 = "";
         private string homepage = "";
         private string secondary_address = "";
         private string secondary_home = "";
         private string secondary_notes = "";
+        private string allPhones;
+        private string allEmails;
 
         public ContactData(string firstname, string lastname, string address, string email, string telephone_home)
         {
-            this.firstname = firstname;
-            this.lastname = lastname;
-            this.address = address;
-            this.email = email;
-            this.telephone_home = telephone_home;
+            Firstname = firstname;
+            Lastname = lastname;
+            Address = address;
+            Email = email;
+            Telephone_home = telephone_home;
         }
 
-        public string Firstname
+        public ContactData(string firstname, string lastname)
         {
-            get { return firstname; }
-            set { firstname = value; }
+            Firstname = firstname;
+            Lastname = lastname;
         }
 
-        public string Lastname
+        public string Firstname { get; set; }
+
+        public string Lastname { get; set; }
+
+        public string Address { get; set; }
+
+        public string Email { get; set; }
+
+        public string Email2 { get; set; }
+
+        public string Email3 { get; set; }
+
+        public string Telephone_home { get; set; }
+
+        public string Telephone_mobile { get; set; }
+
+        public string Telephone_work { get; set; }
+
+        public string Middlename { get; set; }
+        public string AllPhones 
         {
-            get { return lastname; }
-            set { lastname = value; }
+            get 
+            {
+                if (allPhones != null)
+                {
+                    return allPhones;
+                }
+                else 
+                {
+                    return (PhoneFormating(Telephone_home) + PhoneFormating(Telephone_mobile) + PhoneFormating(Telephone_work)).Trim();
+                }
+            }
+
+            set { allPhones = value; } 
         }
 
-        public string Address
+        public string AllEmails 
         {
-            get { return address; }
-            set { address = value; }
-        }
-        public string Email
-        {
-            get { return email; }
-            set { email = value; }
+            get
+            {
+                if (allEmails != null)
+                {
+                    return allEmails;
+                }
+                return (Email + Email2 + Email3).Trim();
+            }
+            
+            set { allEmails = value; }
         }
 
-        public string Telephone_home
+        private string PhoneFormating(string phones)
         {
-            get { return telephone_home; }
-            set { telephone_home = value; }
+            if (phones == null || phones == "") { return ""; }
+
+            return phones.Replace(" ", "").Replace("(", "").Replace(")", "").Replace("-", "") + "\r\n";
         }
+
     }
 }

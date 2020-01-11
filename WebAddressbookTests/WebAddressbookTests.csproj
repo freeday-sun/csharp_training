@@ -60,6 +60,7 @@
     <Compile Include="appmanager\BaseHelper.cs" />
     <Compile Include="tests\AuthBaseTest.cs" />
     <Compile Include="tests\BaseTest.cs" />
+    <Compile Include="tests\ContactTests\ContactInformationTests.cs" />
     <Compile Include="tests\ContactTests\ContactModificationTests.cs" />
     <Compile Include="tests\ContactTests\ContactRemovalTests.cs" />
     <Compile Include="tests\ContactTests\ContactCreationTests.cs" />
