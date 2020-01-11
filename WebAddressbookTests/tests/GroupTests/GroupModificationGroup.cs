@@ -13,6 +13,7 @@ namespace WebAddressbookTests.tests.GroupTests
             //prepare
             app.Groups.GroupsShouldNotBeEmpty();
             List<GroupData> oldGroups = app.Groups.GetGroupsList();
+            GroupData oldData = oldGroups[GROUP_INDEX];
 
             //action
             GroupData newGroupData = new GroupData("name2");
@@ -24,6 +25,14 @@ namespace WebAddressbookTests.tests.GroupTests
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
+
+            foreach (GroupData group in newGroups)
+            {
+                if (group.Id == oldData.Id)
+                {
+                    Assert.AreEqual(newGroupData.Name, group.Name);
+                }
+            }
         }
     }
 }
