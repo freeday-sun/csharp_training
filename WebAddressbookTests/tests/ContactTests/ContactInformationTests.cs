@@ -25,5 +25,20 @@ namespace WebAddressbookTests.tests.ContactTests
             Assert.AreEqual(ContactInfoFromMainPage.AllPhones, ContactInfoFromContacModifyPage.AllPhones);
             Assert.AreEqual(ContactInfoFromMainPage.AllEmails, ContactInfoFromContacModifyPage.AllEmails);
         }
+
+        [Test]
+        public void ContactDetailInformationTest()
+        {
+            //prepare
+            app.Contact.ContactsShouldNotBeEmpty();
+
+            //action
+            ContactData ContactInfoFromMainPage = app.Contact.GetContactInfoFromContacModifyPage(CONTACT_INDEX);
+            string ContactInfoFromContactDetailInformationPage = app.Contact.GetContactInfoFromContactDetailInformationPage(CONTACT_INDEX);
+
+
+            //verification
+            Assert.AreEqual(ContactInfoFromMainPage.AllInfo, ContactInfoFromContactDetailInformationPage);
+        }
     }
 }

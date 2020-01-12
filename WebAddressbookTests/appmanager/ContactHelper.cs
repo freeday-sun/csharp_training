@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace WebAddressbookTests
 {
@@ -16,8 +17,30 @@ namespace WebAddressbookTests
             manager.Navigator.GoToAddContactPage();
             FillContactForm(contact);
             SubmitContactForm();
+            contactCache = null;
             manager.Navigator.ReturnToHomePageAfterWorkWithContact();
             return this;
+        }
+        private List<ContactData> contactCache = null;
+
+        public List<ContactData> GetContactsList()
+        {
+            if (contactCache == null)
+            {
+                contactCache = new List<ContactData>();
+                manager.Navigator.GoToMainPage();
+                ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name=\"entry\"]"));
+                foreach (IWebElement element in elements)
+                {
+                    IList<IWebElement> fields = element.FindElements(By.TagName("td"));
+                    string Firstname = fields[2].Text;
+                    string Lastname = fields[1].Text;
+                    ContactData contacts = new ContactData(Firstname, Lastname);
+                    contacts.Id = element.FindElement(By.XPath("//td//input")).GetAttribute("value");
+                    contactCache.Add(contacts);
+                }
+            }
+            return new List<ContactData>(contactCache);
         }
 
         internal ContactHelper Modify(ContactData newContactData, int index)
@@ -26,6 +49,7 @@ namespace WebAddressbookTests
             InitModificateContact(index);
             FillContactForm(newContactData);
             SubmitModificationContact();
+            contactCache = null;
             manager.Navigator.ReturnToHomePageAfterWorkWithContact();
             return this;
         }
@@ -36,6 +60,7 @@ namespace WebAddressbookTests
             SelectContact(index);
             SubmitDeleteContact();
             SubmitDeleteContectAlert();
+            contactCache = null;
             manager.Navigator.GoToMainPage();
             return this;
         }
@@ -46,6 +71,7 @@ namespace WebAddressbookTests
             SelectAllContacts();
             SubmitDeleteContact();
             SubmitDeleteContectAlert();
+            contactCache = null;
             manager.Navigator.GoToMainPage();
             return this;
         }
@@ -83,6 +109,14 @@ namespace WebAddressbookTests
 
             InitModificateContact(index);
             return GetInfoContacModifyPage();
+        }
+
+        public string GetContactInfoFromContactDetailInformationPage(int index)
+        {
+            manager.Navigator.GoToMainPage();
+
+            InitGetContactDetails(index);
+            return GetInfoContacDetailPage();
         }
 
         private ContactData GetInfoContacMainPage(IList<IWebElement> contacts)
@@ -138,6 +172,21 @@ namespace WebAddressbookTests
             return this;
         }
 
+        private string GetInfoContacDetailPage()
+        {
+            string ContactDetails = driver.FindElement(By.CssSelector("div#content")).Text;
+            ContactDetails = Regex.Replace(ContactDetails, "[ ()\\r\\n-]", "");
+            return ContactDetails;
+        }
+
+        private ContactHelper InitGetContactDetails(int index)
+        {
+            driver.FindElements(By.Name("entry"))[index] // contacts rows in table
+                .FindElements(By.TagName("td"))[6] // details button index in row in table
+                .FindElement(By.TagName("a")).Click();
+            return this;
+        }
+
         private ContactHelper InitModificateContact(int index)
         {
             driver.FindElements(By.Name("entry"))[index] // contacts rows in table
@@ -159,7 +208,9 @@ namespace WebAddressbookTests
 
         public ContactHelper SelectContact(int index)
         {
-            driver.FindElement(By.XPath("//tbody/tr["+ index +"]/td/input")).Click();
+            driver.FindElements(By.Name("entry"))[index] // contacts rows in table
+                .FindElements(By.TagName("td"))[0] // select button index in row in table
+                .FindElement(By.TagName("input")).Click();
             return this;
         }
 
