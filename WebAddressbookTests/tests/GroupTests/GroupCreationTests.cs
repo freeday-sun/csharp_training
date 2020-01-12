@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 
 namespace WebAddressbookTests.tests.GroupTests
@@ -6,51 +7,22 @@ namespace WebAddressbookTests.tests.GroupTests
     [TestFixture]
     class GroupCreationTests : AuthBaseTest
     {
+        public static IEnumerable<GroupData> RandomGroupDataProvider()
+        {
+            List<GroupData> groups = new List<GroupData>();
 
-        [Test]
-        public void GroupCreationTest()
-        {   //prepare
-            GroupData group = new GroupData("name")
+            for (int i = 0; i < 5; i++)
             {
-                Header = "Header",
-                Footer = "Footer"
-            };
-            List<GroupData> oldGroups = app.Groups.GetGroupsList();
+                groups.Add( new GroupData(GenerateRandomString(30) )
+                {Header = GenerateRandomString(100), Footer= GenerateRandomString(100) } );
+            }
 
-            //action
-            app.Groups.Create(group);
-
-            //verification
-            List<GroupData> newGroups = app.Groups.GetGroupsList();
-            oldGroups.Add(group);
-            oldGroups.Sort();
-            newGroups.Sort();
-            Assert.AreEqual(oldGroups, newGroups);
+            return groups;
         }
 
-        [Test]
-        public void EmptyGroupCreationTest()
+        [Test, TestCaseSource("RandomGroupDataProvider")]
+        public void GroupCreationTest(GroupData group)
         {
-            //prepare
-            GroupData group = new GroupData("");
-            List<GroupData> oldGroups = app.Groups.GetGroupsList();
-
-            //action
-            app.Groups.Create(group);
-
-            //verification
-            List<GroupData> newGroups = app.Groups.GetGroupsList();
-            oldGroups.Add(group);
-            oldGroups.Sort();
-            newGroups.Sort();
-            Assert.AreEqual(oldGroups, newGroups);
-        }
-
-        [Test]
-        public void BadNameGroupCreationTest()
-        {
-            //prepare
-            GroupData group = new GroupData("w'a");
             List<GroupData> oldGroups = app.Groups.GetGroupsList();
 
             //action

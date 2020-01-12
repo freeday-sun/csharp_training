@@ -24,6 +24,11 @@ namespace WebAddressbookTests
             return Name.GetHashCode();
         }
 
+        public override string ToString()
+        {
+            return "name=" + Name + "\nheader=" + Header + "\nfooter=" + Footer;
+        }
+
         public int CompareTo(GroupData other)
         {
             if (object.ReferenceEquals(other, null))
