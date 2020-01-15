@@ -116,7 +116,7 @@ namespace WebAddressbookTests
             manager.Navigator.GoToMainPage();
 
             InitGetContactDetails(index);
-            return GetInfoContacDetailPage();
+            return driver.FindElement(By.CssSelector("div#content")).Text;
         }
 
         private ContactData GetInfoContacMainPage(IList<IWebElement> contacts)
@@ -170,13 +170,6 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.Name("update")).Click();
             return this;
-        }
-
-        private string GetInfoContacDetailPage()
-        {
-            string ContactDetails = driver.FindElement(By.CssSelector("div#content")).Text;
-            ContactDetails = Regex.Replace(ContactDetails, "[ ()\\r\\n-]", "");
-            return ContactDetails;
         }
 
         private ContactHelper InitGetContactDetails(int index)

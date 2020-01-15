@@ -33,12 +33,12 @@ namespace WebAddressbookTests.tests.ContactTests
             app.Contact.ContactsShouldNotBeEmpty();
 
             //action
-            ContactData ContactInfoFromMainPage = app.Contact.GetContactInfoFromContacModifyPage(CONTACT_INDEX);
+            ContactData ContactInfoFromModifyPage = app.Contact.GetContactInfoFromContacModifyPage(CONTACT_INDEX);
             string ContactInfoFromContactDetailInformationPage = app.Contact.GetContactInfoFromContactDetailInformationPage(CONTACT_INDEX);
 
 
             //verification
-            Assert.AreEqual(ContactInfoFromMainPage.AllInfo, ContactInfoFromContactDetailInformationPage);
+            Assert.AreEqual(ContactInfoFromModifyPage.AllInfo, ContactInfoFromContactDetailInformationPage);
         }
     }
 }

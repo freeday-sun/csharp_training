@@ -111,7 +111,18 @@ namespace WebAddressbookTests
                 {
                     return allEmails;
                 }
-                return (Email + Email2 + Email3).Trim();
+                string emails = "";
+
+                if (!String.IsNullOrEmpty(Email))
+                { emails += Email; }
+
+                if (!String.IsNullOrEmpty(Email2))
+                { emails += Email2; }
+
+                if (!String.IsNullOrEmpty(Email3))
+                { emails += Email3; }
+                 
+                return emails.Trim();
             }
             
             set { allEmails = value; }
@@ -125,49 +136,47 @@ namespace WebAddressbookTests
                 {
                     return allInfo;
                 }
-                string test = "firstnamelastnameaddressaddressaddressaddressaddressaddressH:+704003M:telephoneMobilemailmail2mail3";
                 string ContactDetailInfo = "";
                 
                 if (!String.IsNullOrEmpty(Firstname))
-                { ContactDetailInfo += Firstname; }
+                { ContactDetailInfo += Firstname + " "; }
                 
                 if (!String.IsNullOrEmpty(Lastname))
-                { ContactDetailInfo += Lastname; }
+                { ContactDetailInfo += Lastname + "\r\n"; }
                 
                 if (!String.IsNullOrEmpty(Address))
                 {
-                    Address = Regex.Replace(Address, "[\\r\\n]", "");
-                    ContactDetailInfo += Address; }
+                    ContactDetailInfo += Address + "\r\n";
+                }
+
+                if (Firstname != null || Lastname != null || Address != null)
+                { ContactDetailInfo += "\r\n"; }
 
                 if (!String.IsNullOrEmpty(Telephone_home))
-                { ContactDetailInfo += "H:" + PhoneFormatinOnlyNumbers(Telephone_home); }
+                { ContactDetailInfo += "H: " + Telephone_home + "\r\n"; }
 
                 if (!String.IsNullOrEmpty(Telephone_mobile))
-                { ContactDetailInfo += "M:" + PhoneFormatinOnlyNumbers(Telephone_mobile); }
+                { ContactDetailInfo += "M: " + Telephone_mobile + "\r\n"; }
 
                 if (!String.IsNullOrEmpty(Telephone_work))
-                { ContactDetailInfo += "W:" + PhoneFormatinOnlyNumbers(Telephone_work); }
+                { ContactDetailInfo += "W: " + Telephone_work + "\r\n"; }
+
+                if (Telephone_home != null || Telephone_mobile != null || Telephone_work != null)
+                { ContactDetailInfo += "\r\n"; }
 
                 if (!String.IsNullOrEmpty(Email))
-                { ContactDetailInfo += Email; }
+                { ContactDetailInfo += Email + "\r\n"; }
 
                 if (!String.IsNullOrEmpty(Email2))
-                { ContactDetailInfo += Email2; }
+                { ContactDetailInfo += Email2 + "\r\n"; }
 
                 if (!String.IsNullOrEmpty(Email3))
-                { ContactDetailInfo += Email3; }
+                { ContactDetailInfo += Email3 + "\r\n"; }
 
                 return ContactDetailInfo.Trim();
             }
 
             set { allInfo = value; }
-        }
-
-        private string PhoneFormatinOnlyNumbers(string phones)
-        {
-            if (phones == null || phones == "") { return ""; }
-
-            return Regex.Replace(phones, "[ ()-]", "");
         }
 
         private string PhoneFormating(string phones)
