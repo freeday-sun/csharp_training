@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace WebAddressbookDataGenerators
 {
@@ -28,15 +29,15 @@ namespace WebAddressbookDataGenerators
 
             if (fileFormat == "csv")
             {
-                writeGroupsToCsv(groups, writer);
+                writeGroupsToCsvFile(groups, writer);
             }
             else if (fileFormat == "xml")
             {
-                writeGroupsToXml(groups, writer);
+                writeGroupsToXmlFile(groups, writer);
             }
             else if (fileFormat == "json")
             {
-                writeGroupsToJson(groups, writer);
+                writeGroupsToJsonFile(groups, writer);
             }
             else
             {
@@ -45,7 +46,7 @@ namespace WebAddressbookDataGenerators
             writer.Close();
         }
 
-        static void writeGroupsToCsv(List<GroupData> groups, StreamWriter writer)
+        static void writeGroupsToCsvFile(List<GroupData> groups, StreamWriter writer)
         {
             foreach (GroupData group in groups)
             {
@@ -55,14 +56,14 @@ namespace WebAddressbookDataGenerators
             }
         }
 
-        static void writeGroupsToXml(List<GroupData> groups, StreamWriter writer)
+        static void writeGroupsToXmlFile(List<GroupData> groups, StreamWriter writer)
         {
             new XmlSerializer(typeof(List<GroupData>)).Serialize(writer, groups);
         }
 
-        static void writeGroupsToJson(List<GroupData> groups, StreamWriter writer)
+        static void writeGroupsToJsonFile(List<GroupData> groups, StreamWriter writer)
         {
-
+            writer.Write(JsonConvert.SerializeObject(groups, Newtonsoft.Json.Formatting.Indented));
         }
     }
 }
