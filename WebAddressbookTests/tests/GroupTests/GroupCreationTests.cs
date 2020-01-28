@@ -10,6 +10,9 @@ namespace WebAddressbookTests.tests.GroupTests
     [TestFixture]
     class GroupCreationTests : AuthBaseTest
     {
+        public static string dir = TestContext.CurrentContext.TestDirectory
+                           .Replace("\\bin\\Debug", "\\data");
+
         public static IEnumerable<GroupData> RandomGroupDataProvider()
         {
             List<GroupData> groups = new List<GroupData>();
@@ -26,7 +29,7 @@ namespace WebAddressbookTests.tests.GroupTests
         public static IEnumerable<GroupData> GetGroupDataFromCsvFile()
         {
             List<GroupData> groups = new List<GroupData>();
-            string[] lines = File.ReadAllLines(@"D:\Courses\DotNet\csharp_training\WebAddressbookTests\data\groups.csv");
+            string[] lines = File.ReadAllLines(dir + "\\groups.csv");
             foreach (string line in lines)
             {
                 string[] parts =  line.Split(',');
@@ -43,16 +46,16 @@ namespace WebAddressbookTests.tests.GroupTests
         {
             return (List<GroupData>) 
                 new XmlSerializer(typeof(List<GroupData>))
-                .Deserialize(new StreamReader(@"D:\Courses\DotNet\csharp_training\WebAddressbookTests\data\groups.xml"));
+                .Deserialize(new StreamReader(dir + "\\groups.xml"));
         }
 
         public static IEnumerable<GroupData> GetGroupDataFromJsonFile()
         {
             return JsonConvert.DeserializeObject<List<GroupData>>(
-                File.ReadAllText(@"D:\Courses\DotNet\csharp_training\WebAddressbookTests\data\groups.json"));
+                File.ReadAllText(dir + "\\groups.json"));
         }
 
-        [Test, TestCaseSource("GetGroupDataFromJsonFile")]
+        [Test, TestCaseSource("GetGroupDataFromXmlFile")]
         public void GroupCreationTest(GroupData group)
         {
             List<GroupData> oldGroups = app.Groups.GetGroupsList();

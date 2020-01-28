@@ -9,6 +9,8 @@ namespace WebAddressbookTests.tests.ContactTests
     [TestFixture]
     public class ContactCreationTests : AuthBaseTest
     {
+         public static string dir = TestContext.CurrentContext.TestDirectory
+                                    .Replace("\\bin\\Debug", "\\data");
 
         public static IEnumerable<ContactData> RandomContactDataProvider()
         {
@@ -29,7 +31,7 @@ namespace WebAddressbookTests.tests.ContactTests
         public static IEnumerable<ContactData> GetContactDataFromCsvFile()
         {
             List<ContactData> contacts = new List<ContactData>();
-            string[] lines = File.ReadAllLines(@"D:\Courses\DotNet\csharp_training\WebAddressbookTests\data\contacts.csv");
+            string[] lines = File.ReadAllLines(dir + "\\contacts.csv");
             foreach (string line in lines)
             {
                 string[] parts = line.Split(',');
@@ -48,16 +50,16 @@ namespace WebAddressbookTests.tests.ContactTests
         {
             return (List<ContactData>)
                 new XmlSerializer(typeof(List<ContactData>))
-                .Deserialize(new StreamReader(@"D:\Courses\DotNet\csharp_training\WebAddressbookTests\data\contacts.xml"));
+                .Deserialize(new StreamReader(dir + "\\contacts.xml"));
         }
 
-        public static IEnumerable<ContactData> GetGroupDataFromJsonFile()
+        public static IEnumerable<ContactData> GetContactDataFromJsonFile()
         {
             return JsonConvert.DeserializeObject<List<ContactData>>(
-                File.ReadAllText(@"D:\Courses\DotNet\csharp_training\WebAddressbookTests\data\contacts.json"));
+                File.ReadAllText(dir + "\\contacts.json"));
         }
 
-        [Test, TestCaseSource("GetGroupDataFromJsonFile")]
+        [Test, TestCaseSource("GetContactDataFromXmlFile")]
         public void ContactCreationTest(ContactData contact)
         {
             //prepare
